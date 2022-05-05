@@ -1,9 +1,8 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 # Ограничиваем размер файла здесь
 app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
-
 
 @app.route('/')
 def page_form():
@@ -16,7 +15,6 @@ def page_form():
     """
     return form_content
 
-
 @app.route('/upload', methods=['POST'])
 def page_upload():
     """ Эта вьюшка обрабатывает форму"""
@@ -24,11 +22,11 @@ def page_upload():
     # Получаем объект картинки из формы
     picture = request.files.get("picture")
 
-    # Получаем имя файла у загруженного фала
-    filename = picture.filename
-
+    # Получаем имя файла у загруженного файла
+	filename = picture.filename
     # Сохраняем картинку под родным именем в папку uploads
-    picture.save(f"./uploads/{filename}")
+	picture.save(f"./uploads/{filename}")
+
     return f"Загружен и сохранен файл"
 
 app.run()
