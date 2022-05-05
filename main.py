@@ -23,10 +23,9 @@ def page_upload():
     picture = request.files.get("picture")
 
     # Получаем имя файла у загруженного файла
-	filename = picture.filename
+    filename = picture.filename
     # Сохраняем картинку под родным именем в папку uploads
-	picture.save(f"./uploads/{filename}")
-
+    picture.save(f"./uploads/{filename}")
     return f"Загружен и сохранен файл"
 
 app.run()
